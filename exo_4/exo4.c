@@ -1,15 +1,3 @@
-/* md5hl.c
- * ----------------------------------------------------------------------------
- * "THE BEER-WARE LICENSE" (Revision 42):
- * <phk@login.dkuug.dk> wrote this file.  As long as you retain this notice you
- * can do whatever you want with this stuff. If we meet some day, and you think
- * this stuff is worth it, you can buy me a beer in return.   Poul-Henning Kamp
- * ----------------------------------------------------------------------------
- *
- * $Id: md5hl.c.html,v 1.2 2009-06-26 16:35:53 wagner Exp $
- *
- */
-
 #include <sys/types.h>
 #include <fcntl.h>
 #include <unistd.h>
@@ -37,7 +25,7 @@ char * MD5File ( char *filename, char *buf)
         buf = malloc(33);
 
     if (inFile == NULL) {
-        printf ("%s fichier non ouvert.\n", filename);
+        printf ("%s Fichier non ouvert.\n", filename);
         return 0;
     }
 
