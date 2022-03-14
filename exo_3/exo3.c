@@ -18,12 +18,12 @@ int main()
   
     if (pipe(fd1)==-1)
     {
-        fprintf(stderr, "Pipe Failed" );
+        fprintf(stderr, "Échec de Pipe" );
         return 1;
     }
     if (pipe(fd2)==-1)
     {
-        fprintf(stderr, "Pipe Failed" );
+        fprintf(stderr, "Échec de Pipe" );
         return 1;
     }
   
@@ -32,7 +32,7 @@ int main()
   
     if (p < 0)
     {
-        fprintf(stderr, "fork Failed" );
+        fprintf(stderr, "Échec de fork" );
         return 1;
     }
   
