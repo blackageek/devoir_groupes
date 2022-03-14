@@ -54,7 +54,7 @@ int main()
   
         
         read(fd2[0], concat_str, 100);
-        printf(" je suis enfant j'ais reçu : Code(%s) de mon père", concat_str);
+        printf(" je suis l'enfant j'ai reçu : Code(%s) de mon père ", concat_str);
         close(fd2[0]);
     }
   
