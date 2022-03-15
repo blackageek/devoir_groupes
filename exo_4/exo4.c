@@ -1,49 +1,12 @@
 #include <sys/types.h>
-#include <fcntl.h>
-#include <unistd.h>
-
 #include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
-
 #include "md5.h"
 
 
 
-char * MD5File ( char *filename, char *buf)
-{
-    unsigned char c[BUFSIZ];
-    int i;
-    FILE *inFile = fopen (filename, "rb");
-    MD5_CTX mdContext;
-    int bytes;
-    unsigned char data[1024];
-    unsigned char *dat=NULL;
-    unsigned char digest[16];
-    static const char hex[]="0123456789abcdef";
-    if (!buf)
-        buf = malloc(33);
 
-    if (inFile == NULL) {
-        printf ("%s Fichier non ouvert.\n", filename);
-        return 0;
-    }
-
-    MD5Init (&mdContext);
-    while ((bytes = fread (data, 1, 1024, inFile)) != 0)
-        MD5Update (&mdContext, data, bytes);
-    MD5Final (digest,&mdContext);
-
-    for (i=0;i<16;i++) {
-	buf[i+i] = hex[digest[i] >> 4];
-	buf[i+i+1] = hex[digest[i] & 0x0f];
-    }
-    buf[i+i] = '\0';
-
-    fclose (inFile);
-
-    return buf;
-}
 
 int main(int argc , char *argv[]){
 char data[512];
