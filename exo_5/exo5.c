@@ -1,3 +1,4 @@
+
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <string.h>
@@ -8,26 +9,47 @@
 #include <errno.h>
 #include "md5.h"
 
+
+int main(int argc, char **argv)
 {
-   erreur ( "fichier(fc2)" );
+int fd1, fd2, r;
+char buf;
+char buf1[512];
+char buf2[512];
+unsigned char *MD51=NULL;
+unsigned char *MD52=NULL;
+if(argc != 3) {
+fprintf(stderr, "Syntaxe: %s fichier_source fichier_destination\n", argv[0]);
+exit(1);
+}
+
+   fd1 = open(argv[1], O_RDONLY);
+   if(fd1 < 0) {
+   perror("fichier(fd1)");
+   exit(1);
+}
+
+fd2 = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC, 0666);
+   if(fd2 < 0) {
+   perror("fichier(fd2)");
    exit(1);
 }
 
 while(1) {
-     rc = read(fd1, &buf, 1);
-if(rc < 0) {
-    perror("lecture");
+     r = read(fd1, &buf, 1);
+if(r < 0) {
+    perror("Lecture");
     exit(1);
 }
-if(rc == 0)
+if(r == 0)
 break;
-rc = write(fd2, &buf, 1);
-if(rc < 0) {
-perror("ecriture");
+r = write(fd2, &buf, 1);
+if(r < 0) {
+perror("Ecriture");
 exit(1);
 }
 
-if(rc != 1) {
+if(r != 1) {
 fprintf(stderr, "Erreur Ecriture ");
 exit(1);
 }
@@ -37,16 +59,30 @@ exit(1);
 
 close(fd1);
 close(fd2);
-MD5_1= MD5File(argv[1], buf1);
-MD5_2 =  MD5File ( argv [ 2 ], buf2 );
+MD51= MD5File(argv[1], buf1);
+MD52= MD5File(argv[2], buf2);
 
 
-if (strcmp(MD5_1, MD5_2)==0) {
-    fprintf(stderr, "copie effectuer\n MD5 %s  : %s  = %s %s MD5 \n", argv[1],MD5_1  ,MD5_2, argv[2]);
+if (strcmp(MD51, MD52)==0) {
+    printf("copie effectuer\n MD5 %s  : %s  = %s %s MD5 \n", argv[1],MD51  ,MD52, argv[2]);
 
   } else {
-    fprintf(stderr, "%s: different de  %s\n", MD5_1, MD5_2);
+    printf("%s: different de  %s\n", MD51, MD52);
 
   }
 return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
